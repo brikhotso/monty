@@ -39,7 +39,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 
 	while (current != NULL)
 	{
-		if (current->n > 127 || current->n <= 0)
+		if (current->n == 0 || current->n < 0)
 			break;
 
 		fprintf(stdout, "%c", current->n);
