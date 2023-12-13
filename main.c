@@ -61,10 +61,11 @@ void process_file(const char *filename)
 	{
 		line_number++;
 
-		if (line && line[0] == '#')
+		opcode = strtok(line, " \t\n");
+
+		if (opcode != NULL && opcode[0] == '#')
 			continue;
 
-		opcode = strtok(line, " \t\n");
 		if (opcode != NULL)
 		{
 			exec_instruction(opcode, &stack, line_number);
