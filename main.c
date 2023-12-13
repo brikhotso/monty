@@ -24,7 +24,7 @@ void exec_instruction(char *opcode, stack_t **stack, unsigned int line_number)
 		{NULL, NULL}
 	};
 
-	while (instructions[count].opcode != NULL)
+	while (instructions[count].opcode != NULL && opcode == NULL)
 	{
 		if (strcmp(opcode, instructions[count].opcode) == 0)
 		{
