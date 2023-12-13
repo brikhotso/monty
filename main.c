@@ -61,7 +61,7 @@ void process_file(const char *filename)
 	{
 		line_number++;
 
-		if (line[0] == '#')
+		if (line && line[0] == '#')
 			continue;
 
 		opcode = strtok(line, " \t\n");
