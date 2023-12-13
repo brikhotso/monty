@@ -32,7 +32,8 @@ void add_op(stack_t **stack, unsigned int line_number)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't add, stack too short\n",
+			line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -51,4 +52,27 @@ void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
+}
+
+/**
+ * create_node - Create a new node with the given data
+ * @data: data for the new node
+ * @line_number: line number in the file
+ * Return: pointer to the new node
+ */
+stack_t *create_node(int data, unsigned int line_number)
+{
+	stack_t *new_node = malloc(sizeof(stack_t));
+	(void)line_number;
+
+	if (new_node == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	new_node->n = data;
+	new_node->prev = NULL;
+	new_node->next = NULL;
+
+	return (new_node);
 }

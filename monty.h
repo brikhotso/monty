@@ -2,6 +2,11 @@
 #define MONTY_H
 
 #define _GNU_SOURCE
+#define STACK 0
+#define QUEUE 1
+#define UNDEFINED -1
+
+extern int mode;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,6 +57,10 @@ void sub_op(stack_t **stack, unsigned int line_number);
 void mul_op(stack_t **stack, unsigned int line_number);
 void div_op(stack_t **stack, unsigned int line_number);
 void mod_op(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
 
 /* Helper functions */
 void exec_instruction(char *opcode, stack_t **stack, unsigned int line_number);
@@ -59,5 +68,12 @@ void process_file(const char *filename);
 
 int is_numeric(const char *str);
 void free_stack(stack_t *stack);
+
+void set_mode(int op_mode);
+void set_stack_mode(stack_t **stack, unsigned int line_number);
+void set_queue_mode(stack_t **stack, unsigned int line_number);
+stack_t *create_node(int data, unsigned int line_number);
+void push_stack(stack_t **stack, stack_t *new_node);
+void push_queue(stack_t **stack, stack_t *new_node);
 
 #endif /* MONTY_H */

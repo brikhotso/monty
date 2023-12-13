@@ -19,7 +19,7 @@ int is_numeric(const char *str)
 }
 
 /**
- * push - Push an element to stack
+ * push - Push an element to stack or queue based on the current mode
  * @stack: pointer to top of stack
  * @line_number: line number in the file
  */
@@ -31,31 +31,35 @@ void push(stack_t **stack, unsigned int line_number)
 
 	data_str = strtok(NULL, " \t\n");
 
-	if (data_str == NULL  || !is_numeric(data_str))
+	if (data_str == NULL || !is_numeric(data_str))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
 	data = atoi(data_str);
-	new_node = malloc(sizeof(stack_t));
+	new_node = create_node(data, line_number);
 
-	if (new_node == NULL)
+	if (mode == UNDEFINED)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		set_mode(STACK);
+	}
+
+	if (mode == STACK)
+	{
+		push_stack(stack, new_node);
+	}
+	else if (mode == QUEUE)
+	{
+		push_queue(stack, new_node);
+	}
+	else
+	{
+		fprintf(stderr, "L%u: invalid mode\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = data;
-	new_node->prev = NULL;
-	new_node->next = *stack;
-
-	if (*stack != NULL)
-	{
-		(*stack)->prev = new_node;
-	}
-
-	*stack = new_node;
 }
+
 
 /**
  * pall - Print all data on the stack
