@@ -1,5 +1,7 @@
 #include "monty.h"
 
+int mode = STACK;
+
 /**
  * exec_instruction - Executes instruction as per opcode
  * @opcode: opcode to execute
@@ -21,6 +23,12 @@ void exec_instruction(char *opcode, stack_t **stack, unsigned int line_number)
 		{"div", div_op},
 		{"mul", mul_op},
 		{"mod", mod_op},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
+		{"stack", set_stack_mode},
+		{"queue", set_queue_mode},
 		{NULL, NULL}
 	};
 
