@@ -31,13 +31,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	data_str = strtok(NULL, " \t\n");
 
-	if (data_str == NULL)
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	if (!is_numeric(data_str))
+	if (data_str == NULL  || !is_numeric(data_str))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
@@ -70,13 +64,13 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current;
-	(void)line_number; /*unused varaible*/
+	stack_t *current = *stack;
+	(void)line_number; /* Unused variable */
 
-	current = *stack;
-
-	if ( current == NULL)
+	if (current == NULL)
+	{
 		return;
+	}
 
 	while (current != NULL)
 	{
@@ -84,7 +78,6 @@ void pall(stack_t **stack, unsigned int line_number)
 		current = current->next;
 	}
 }
-
 
 /**
  * pint - Print data at the top of stack
