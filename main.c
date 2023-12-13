@@ -39,16 +39,6 @@ void exec_instruction(char *opcode, stack_t **stack, unsigned int line_number)
 }
 
 /**
- * is_comment - check for comments
- * @line: line to check
- * Return: check
- */
-int is_comment(const char *line)
-{
-	return (line && line[0] == '#');
-}
-
-/**
  * process_file - Process Monty bytecode file
  * @filename: name of file containing Monty bytecode
  */
@@ -71,8 +61,8 @@ void process_file(const char *filename)
 	{
 		line_number++;
 
-		if (is_comment(line))
-			break;
+		if (line && line[0] == '#')
+			continue;
 
 		opcode = strtok(line, " \t\n");
 		if (opcode != NULL)
