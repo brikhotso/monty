@@ -24,8 +24,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	putchar(ascii_value);
-	putchar('\n');
+	fprintf(stdout, "%c\n", ascii_value);
 }
 
 /**
@@ -41,11 +40,11 @@ void pstr(stack_t **stack, unsigned int line_number)
 	while (current != NULL && current->n != 0 &&
 	   (current->n >= 0 && current->n <= 127))
 	{
-		putchar(current->n);
+		fprintf(stdout, "%c", current->n);
 		current = current->next;
 	}
 
-	putchar('\n');
+	fprintf(stdout, "\n");
 }
 
 /**
